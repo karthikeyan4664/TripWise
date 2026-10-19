@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ItineraryItem {
+  id             String    @id @default(uuid())
+  destinationId  String    @unique
+  name           String
+  location       String
+  category       String
+  description    String
+  imageUrl       String?
+  coordinatesLat Float?
+  coordinatesLon Float?
+  notes          String?
+  plannedDate    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([destinationId])
+}
